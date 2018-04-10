@@ -1,0 +1,76 @@
+[
+  {
+    "title": "Clause de gratuité",
+    "description":
+      "Le travail d'un freelance n'a pas de prix mais il a de la valeur.",
+    "type": "negative"
+  },
+  {
+    "title": "Période de test possiblement non-rémunérée",
+    "description":
+      "Tout travail effectué doit être rémunéré, ce n'est pas au freelance travailler gratuitement si subitement il ne correspond plus à la tâche pour laquelle il a été initialement engagé.",
+    "type": "negative"
+  },
+  {
+    "title": "Tacite reconduction",
+    "description":
+      "Suivant votre facilité à trouver une nouvelle mission il peut être interressant de ne pas inclure de tacide reconduction dans les contrats.",
+    "type": "neutral"
+  },
+  {
+    "title": "Nombre de jour de travail fixe par semaine",
+    "description":
+      "Le fait de fixer un nombre de jour limite la capacité du freelance de disposer d'un jour off.",
+    "type": "negative"
+  },
+  {
+    "title": "Nombre d'heure fixe par jour",
+    "description":
+      "Le fait de fixer un nombre d'heure dans le contrat ouvre la porte au discutions tendu sur la durée de présence minimale du freelance dans l'entreprise, sans cette mension le freelance est soumis à la durée de travail légale.",
+    "type": "negative"
+  },
+  {
+    "title": "Portée de la clause de non-concurrence",
+    "description":
+      "Une \"bonne\" clause de non-concurrence se limite au projet auquel est affecté le freelance, sinon au service. L'étendre au niveau de l'entreprise est plus difficile à justifier dans le cas de grand groupe et ne doit jamais inclure les clients des clients",
+    "type": "negative"
+  },
+  {
+    "title": "Durée de la clause de non-concurrence",
+    "description":
+      "Une \"bonne\" clause de non-concurrence empêche le freelance d'être \"recruté\" par un intermédiaire concurrent, 6 mois après la fin de la mission on peut imaginer que le freelance est passé à autre chose.",
+    "type": "negative"
+  },
+
+  {
+    "title": "Paiement à la fin du mois",
+    "description":
+      "Limiter les dates de paiement à un créneau précis risque de décaler d'autant la date de paiement effective.",
+    "type": "negative"
+  },
+
+  {
+    "title": "Paiement par chèque",
+    "description":
+      "Un chèque alonge la durée de paiement de la prestation et reste moins pratique qu'un virement bancaire.",
+    "type": "negative"
+  },
+  {
+    "title": "Clatuse unilatéral",
+    "description":
+      "Les obligation entre un freelance et son contractant devrait normalement être réciproque.",
+    "type": "negative"
+  },
+  {
+    "title": "Préavis trop court",
+    "description":
+      "Un freelance devrais idéalement disposer d'un minimum de temps pour effectuer sa passation ainsi que pour rechercher une nouvelle mission.",
+    "type": "neutral"
+  },
+  {
+    "title": "Clauses imprécise",
+    "description":
+      "Les clauses \"se reporter au condition générales\" risque de rendre le contrat plus complexe en cas de conflit.",
+    "type": "neutral"
+  }
+]

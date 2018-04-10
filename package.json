@@ -3,14 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.5",
+    "@fortawesome/fontawesome-free-solid": "^5.0.9",
+    "@fortawesome/react-fontawesome": "^0.0.18",
     "react": "^16.2.0",
+    "react-codemirror": "^1.0.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.1"
+    "react-redux": "^5.0.7",
+    "react-scripts": "1.1.1",
+    "redux": "^3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "dev": "npm-run-all --parallel css:watch start",
+    "css": "./node_modules/.bin/node-sass-chokidar --include-path ./src src/ -o src/",
+    "css:watch": "./node_modules/.bin/node-sass-chokidar --include-path ./src src/ -o src/ --watch --recursive",
+    "build": "npm run css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "node-sass": "^4.8.3",
+    "node-sass-chokidar": "^1.2.2",
+    "npm-run-all": "^4.1.2",
+    "tachyons": "^4.9.1",
+    "tachyons-sass": "^4.9.2"
   }
 }
