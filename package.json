@@ -2,10 +2,12 @@
   "name": "freelance-reader",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://sbenard.github.io/freelance-reader/",
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.5",
     "@fortawesome/fontawesome-free-solid": "^5.0.9",
     "@fortawesome/react-fontawesome": "^0.0.18",
+    "gh-pages": "^1.1.0",
     "react": "^16.2.0",
     "react-codemirror": "^1.0.0",
     "react-dom": "^16.2.0",
@@ -20,6 +22,7 @@
     "css:watch": "./node_modules/.bin/node-sass-chokidar --include-path ./src src/ -o src/ --watch --recursive",
     "build": "npm run css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
