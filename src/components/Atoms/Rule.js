@@ -36,7 +36,6 @@ class Rule extends Component {
             disabled={isDisabled}
             onClick={setSelection}
           >
-            Associer
             <FontAwesomeIcon className="ml1" icon={faLink} />
           </button>
         </label>
