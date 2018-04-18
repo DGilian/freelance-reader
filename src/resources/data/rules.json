@@ -52,13 +52,13 @@
   {
     "title": "Paiement par chèque",
     "description":
-      "Un chèque alonge la durée de paiement de la prestation et reste moins pratique qu'un virement bancaire.",
+      "Un chèque alonge la durée de paiement de la prestation et reste moins pratique qu'un virement bancaire, sans oublier les risques de perte.",
     "type": "negative"
   },
   {
-    "title": "Clatuse unilatéral",
+    "title": "Clause unilatéral",
     "description":
-      "Les obligation entre un freelance et son contractant devrait normalement être réciproque.",
+      "Les obligation entre un freelance et son contractant devrait normalement être réciproque. ",
     "type": "negative"
   },
   {

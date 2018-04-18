@@ -6,6 +6,8 @@ L'objectif est de mettre en évidence les pièges d'un contrat lors d'une missio
 
 Travail en cours.
 
+La partie listant les clauses à éviter, notament, reste au stade experimental. N'hésitez pas a me donner vos retours sur les pistes à améliorer.
+
 Démo : https://sbenard.github.io/freelance-reader/
 
 ## Installation
@@ -40,7 +42,7 @@ $ yarn dev
 
 * [x] Listing des pièges d'un contrat
 * [ ] Résumé
-  * [ ] Présentation éléments selectionnés
+  * [x] Présentation des éléments selectionnés
   * [ ] Export / partage du résumé
 * [ ] Configuration
   * [ ] Liste paramétrable par l'utilisateur

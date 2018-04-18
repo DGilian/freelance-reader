@@ -16,6 +16,27 @@ const mapDispatchToProps = {
   linkSelection: linkSelectionAction
 }
 
+export const ruleDescription = rule => {
+  if (rule.links && rule.links.length > 0) {
+    return (
+      <div>
+        {rule.links &&
+          rule.links.length > 0 && (
+            <ul>
+              {rule.links.map(({ text, range }, index) => (
+                <li key={index}>
+                  ligne {range.anchor.line + 1} : "{text}"
+                </li>
+              ))}
+            </ul>
+          )}
+      </div>
+    )
+  } else {
+    return null
+  }
+}
+
 class Rule extends Component {
   render() {
     const { rule, selections } = this.props
@@ -39,21 +60,7 @@ class Rule extends Component {
             <FontAwesomeIcon className="ml1" icon={faLink} />
           </button>
         </label>
-        {rule.links &&
-          rule.links.length > 0 && (
-            <div>
-              {rule.links &&
-                rule.links.length > 0 && (
-                  <ul>
-                    {rule.links.map(({ text, range }, index) => (
-                      <li key={index}>
-                        ligne {range.anchor.line + 1} : "{text}"
-                      </li>
-                    ))}
-                  </ul>
-                )}
-            </div>
-          )}
+        {ruleDescription(rule)}
       </React.Fragment>
     )
   }
