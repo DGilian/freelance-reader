@@ -4,12 +4,11 @@ import { connect } from 'react-redux'
 import 'codemirror/mode/markdown/markdown'
 
 import './ContractView.css'
+import contractExamplePath from '../../../resources/contracts/agile.md'
 
 import { setSelectionsAction } from '../../../actions/contractViewActions'
 
-const mapStateToProps = state => {
-  return {}
-}
+const mapStateToProps = state => ({})
 
 const mapDispatchToProps = {
   setSelectionsAction
@@ -21,16 +20,27 @@ class ContractView extends Component {
     this.state = {
       selections: []
     }
+    this.loadExample = this.loadExample.bind(this)
+    this.setCodeMirrorValue = this.setCodeMirrorValue.bind(this)
+  }
+
+  componentDidMount() {
+    this.loadExample()
+  }
+
+  loadExample() {
+    const onSuccess = this.setCodeMirrorValue
+
+    fetch(contractExamplePath)
+      .then(response => response.text())
+      .then(onSuccess)
+  }
+
+  setCodeMirrorValue(value) {
+    this.CodeMirrorInstance.codeMirror.setValue(value)
   }
 
   render() {
-    const txt = `
-### Exemples de clauses abusives
-    Durant les 3 premiers jours de travail le freelance ne sera pas rémunéré, il s'agit d'un acte commercial auprès du client.
-    Les 2 premier mois de travail seront soumis à une période de test durant laquelle le freelance pourrais ne pas être rémunéré suivant le retour du client.
-### Exemple de clauses neutre
-    Le contrat se renouvellera tout les 2 ans par tacite reconduction.`
-
     const handleCursorActivity = ({ doc }) => {
       const { setSelectionsAction } = this.props
       if (doc.somethingSelected()) {
@@ -53,9 +63,9 @@ class ContractView extends Component {
           options={{
             lineNumbers: true,
             lineWrapping: true,
-            mode: 'markdown'
+            mode: 'markdown',
+            viewportMargin: 500
           }}
-          value={txt}
         />
       </React.Fragment>
     )

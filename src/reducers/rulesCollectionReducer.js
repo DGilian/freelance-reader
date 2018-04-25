@@ -7,6 +7,11 @@ const rulesCollection = (
   { type, selections, ruleIndex = 0 } = {}
 ) => {
   switch (type) {
+    case 'CLEAR_ALL_LINKS':
+      return state.map(rule => ({
+        ...rule,
+        links: []
+      }))
     case 'LINK_SELECTIONS':
       return [
         ...state.slice(0, ruleIndex),

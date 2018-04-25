@@ -16,7 +16,7 @@ const mapDispatchToProps = {
   linkSelection: linkSelectionAction
 }
 
-export const ruleDescription = rule => {
+export const getRuleDescription = rule => {
   if (rule.links && rule.links.length > 0) {
     return (
       <div>
@@ -32,8 +32,6 @@ export const ruleDescription = rule => {
           )}
       </div>
     )
-  } else {
-    return null
   }
 }
 
@@ -50,17 +48,17 @@ class Rule extends Component {
 
     return (
       <React.Fragment>
-        <label className="flex justify-between w-100">
+        <label className="flex justify-between w-100 rule">
           {rule.title}
           <button
-            className="pa3 br3"
+            className="pa3 br3 rule--link-button"
             disabled={isDisabled}
             onClick={setSelection}
           >
-            <FontAwesomeIcon className="ml1" icon={faLink} />
+            <FontAwesomeIcon className="ml1 rule--link-icon" icon={faLink} />
           </button>
         </label>
-        {ruleDescription(rule)}
+        {getRuleDescription(rule)}
       </React.Fragment>
     )
   }

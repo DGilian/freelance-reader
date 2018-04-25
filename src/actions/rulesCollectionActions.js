@@ -3,3 +3,7 @@ export const linkSelectionAction = (selections, ruleIndex) => ({
   selections,
   ruleIndex
 })
+
+export const clearSelectionAction = () => ({
+  type: 'CLEAR_ALL_LINKS'
+})

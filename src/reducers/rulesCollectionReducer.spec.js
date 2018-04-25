@@ -68,4 +68,22 @@ describe('rulesCollectionReducer', () => {
       expect(rulesCollection(sample, action)).toEqual(expectedResult)
     })
   })
+
+  describe('CLEAR_ALL_LINKS action', () => {
+    it('should work', () => {
+      const sample = [
+        { links: [1, 2, 3], other: 'test' },
+        { links: [null], stuff: 1 }
+      ]
+      const action = {
+        type: 'CLEAR_ALL_LINKS'
+      }
+      const expectedResult = [
+        { links: [], other: 'test' },
+        { links: [], stuff: 1 }
+      ]
+
+      expect(rulesCollection(sample, action)).toEqual(expectedResult)
+    })
+  })
 })
