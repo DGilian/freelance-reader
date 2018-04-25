@@ -10,6 +10,8 @@ La partie listant les clauses à éviter, notament, reste au stade experimental.
 
 Démo : https://sbenard.github.io/freelance-reader/
 
+Contrat utilisé pour l'exemple : https://github.com/tibastral/contrats-francais/blob/master/src/cga.md
+
 ## Installation
 
 1.  Récupérer le code dans votre espace de travail

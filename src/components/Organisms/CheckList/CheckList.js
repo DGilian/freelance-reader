@@ -3,15 +3,31 @@ import { connect } from 'react-redux'
 
 import './CheckList.css'
 import Rule from '../../Atoms/Rule'
+import { clearSelectionAction } from '../../../actions/rulesCollectionActions'
 
 const mapStateToProps = state => ({ rules: state.ruleCollection })
+const mapDispatchToProps = {
+  clearSelection: clearSelectionAction
+}
 
 class CheckList extends Component {
   render() {
-    const { rules } = this.props
+    const { rules, clearSelection } = this.props
+    const isClearDisabled = !rules.find(
+      rule => rule.links && rule.links.length > 0
+    )
     return (
       <React.Fragment>
-        <h2 className="tc">Todo list</h2>
+        <h2 className="tc checklist--title">Todo list</h2>
+        <div className="tr checklist--sub-title">
+          <button
+            className="tr checklist--clear-button"
+            disabled={isClearDisabled}
+            onClick={clearSelection}
+          >
+            Clear
+          </button>
+        </div>
         <ul>
           {rules &&
             rules.map((rule, index) => (
@@ -25,4 +41,4 @@ class CheckList extends Component {
   }
 }
 
-export default connect(mapStateToProps)(CheckList)
+export default connect(mapStateToProps, mapDispatchToProps)(CheckList)

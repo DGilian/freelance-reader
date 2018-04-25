@@ -1,30 +1,33 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { ruleDescription } from '../../Atoms/Rule'
+import { getRuleDescription } from '../../Atoms/Rule'
 
 function mapStateToProps(state) {
   return {
-    rules: state.ruleCollection
+    selectedRules: state.ruleCollection.filter(
+      el => el.links && el.links.length > 0
+    )
   }
 }
 
 class Summary extends Component {
   render() {
-    const { rules } = this.props
-    const selectedRules = rules.filter(el => el.links && el.links.length > 0)
+    const { selectedRules } = this.props
     return (
-      <React.Fragment>
-        <h2 className="tc">Résumé</h2>
-        <ul className="list">
-          {selectedRules.map((rule, index) => (
-            <li key={index}>
-              <h3>{rule.title} :</h3>
-              {ruleDescription(rule)}
-            </li>
-          ))}
-        </ul>
-      </React.Fragment>
+      selectedRules.length > 0 && (
+        <React.Fragment>
+          <h2 className="tc summary--title">Résumé</h2>
+          <ul className="list  summary--list">
+            {selectedRules.map((rule, index) => (
+              <li key={index}>
+                <h3>{rule.title} :</h3>
+                {getRuleDescription(rule)}
+              </li>
+            ))}
+          </ul>
+        </React.Fragment>
+      )
     )
   }
 }
