@@ -16,7 +16,7 @@ const mapDispatchToProps = {
   linkSelection: linkSelectionAction
 }
 
-export const getRuleDescription = rule => {
+export const getRuleDescription = (rule, fullDescription = false) => {
   if (rule.links && rule.links.length > 0) {
     return (
       <div>
@@ -25,7 +25,10 @@ export const getRuleDescription = rule => {
             <ul>
               {rule.links.map(({ text, range }, index) => (
                 <li key={index}>
-                  ligne {range.anchor.line + 1} : "{text}"
+                  ligne {range.anchor.line + 1} à {range.head.line + 1}
+                  {fullDescription && (
+                    <React.Fragment> : {text}</React.Fragment>
+                  )}
                 </li>
               ))}
             </ul>

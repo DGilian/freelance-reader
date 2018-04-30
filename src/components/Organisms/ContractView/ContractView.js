@@ -20,18 +20,18 @@ class ContractView extends Component {
     this.state = {
       selections: []
     }
-    this.loadExample = this.loadExample.bind(this)
+    this.loadContract = this.loadContract.bind(this)
     this.setCodeMirrorValue = this.setCodeMirrorValue.bind(this)
   }
 
   componentDidMount() {
-    this.loadExample()
+    this.loadContract(contractExamplePath)
   }
 
-  loadExample() {
+  loadContract(path) {
     const onSuccess = this.setCodeMirrorValue
 
-    fetch(contractExamplePath)
+    fetch(path)
       .then(response => response.text())
       .then(onSuccess)
   }
@@ -54,9 +54,22 @@ class ContractView extends Component {
       }
     }
 
+    const loadFile = ({ target: { files } }) => {
+      const [file] = files
+      if (file && file.name.endsWith('.md')) {
+        const url = window.URL.createObjectURL(file)
+        this.loadContract(url)
+      }
+    }
+
     return (
       <React.Fragment>
-        <h2 className="tc">Contract</h2>
+        <div className="contract-view--header">
+          <div className="mb4 contract-view--file-upload">
+            <p>Charger un contrat (format markdonw) :</p>
+            <input type="file" accept=".md" onChange={loadFile} />
+          </div>
+        </div>
         <CodeMirror
           ref={(c: any) => (this.CodeMirrorInstance = c)}
           onCursorActivity={handleCursorActivity}

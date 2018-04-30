@@ -23,14 +23,10 @@ class App extends Component {
           <h1 className="tc App-title">Freelance reader</h1>
         </header>
         <main className="flex flex-wrap flex-column flex-row-l justify-around App-main">
-          <section>
-            <Summary />
-          </section>
-
-          <section className="pa3 w-100 w-50-l App-Main--Rule-list">
+          <section className="pa3 w-100 w-30-l App-Main--Rule-list">
             <CheckList />
           </section>
-          <section className="pa3 w-100 w-50-l App-Main--Contract-view">
+          <section className="pa3 w-100 w-70-l App-Main--Contract-view">
             <ContractView />
           </section>
           <section>

@@ -2,34 +2,48 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { getRuleDescription } from '../../Atoms/Rule'
+import { clearSelectionAction } from '../../../actions/rulesCollectionActions'
 
-function mapStateToProps(state) {
-  return {
-    selectedRules: state.ruleCollection.filter(
-      el => el.links && el.links.length > 0
-    )
-  }
+const mapStateToProps = state => ({
+  selectedRules: state.ruleCollection.filter(
+    el => el.links && el.links.length > 0
+  )
+})
+
+const mapDispatchToProps = {
+  clearSelection: clearSelectionAction
 }
 
 class Summary extends Component {
   render() {
-    const { selectedRules } = this.props
+    const { selectedRules, clearSelection } = this.props
+    const displaySummary = selectedRules.length > 0
+
     return (
-      selectedRules.length > 0 && (
-        <React.Fragment>
+      displaySummary && (
+        <div className="w-100 summary pa3">
           <h2 className="tc summary--title">Résumé</h2>
+          <div className="tr summary--tools">
+            <button
+              className="tr summary--clear-button"
+              onClick={clearSelection}
+            >
+              Clear
+            </button>
+          </div>
+
           <ul className="list  summary--list">
             {selectedRules.map((rule, index) => (
               <li key={index}>
                 <h3>{rule.title} :</h3>
-                {getRuleDescription(rule)}
+                {getRuleDescription(rule, true)}
               </li>
             ))}
           </ul>
-        </React.Fragment>
+        </div>
       )
     )
   }
 }
 
-export default connect(mapStateToProps)(Summary)
+export default connect(mapStateToProps, mapDispatchToProps)(Summary)
