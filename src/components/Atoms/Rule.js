@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import CodeMirror from 'react-codemirror'
 
 import { resetSelectionsAction } from '../../actions/contractViewActions'
-import { linkSelectionAction } from '../../actions/rulesCollectionActions'
+import {
+  linkSelectionAction,
+  updateRuleAction
+} from '../../actions/rulesCollectionActions'
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faLink } from '@fortawesome/fontawesome-free-solid'
+
+import './Rule.css'
 
 const mapStateToProps = ({ contractView }) => ({
   selections: contractView.selections
@@ -13,7 +19,8 @@ const mapStateToProps = ({ contractView }) => ({
 
 const mapDispatchToProps = {
   reset: resetSelectionsAction,
-  linkSelection: linkSelectionAction
+  linkSelection: linkSelectionAction,
+  updateRule: updateRuleAction
 }
 
 export const getRuleDescription = (rule, fullDescription = false) => {
@@ -39,8 +46,16 @@ export const getRuleDescription = (rule, fullDescription = false) => {
 }
 
 class Rule extends Component {
+  constructor(props, context) {
+    super(props, context)
+    this.state = {
+      editing: false
+    }
+  }
+
   render() {
     const { rule, selections } = this.props
+    const { editing } = this.state
     const isDisabled = selections.length === 0
 
     const setSelection = () => {
@@ -48,11 +63,31 @@ class Rule extends Component {
       linkSelection(selections, ruleIndex)
       reset()
     }
+    const toggleEdition = () => this.setState({ editing: !editing })
+
+    const handleFocusChange = hasFocus => {
+      const { updateRule, value, ruleIndex, rule } = this.props
+      if (!hasFocus) {
+        const newTitle = this.CodeMirrorInstance.codeMirror.getValue()
+        this.setState(() => ({
+          editing: !editing
+        }))
+        updateRule(newTitle, ruleIndex)
+      }
+    }
 
     return (
-      <React.Fragment>
+      <div className="rule">
         <label className="flex justify-between w-100 rule">
-          {rule.title}
+          {!editing && <span onClick={toggleEdition}>{rule.title}</span>}
+          {editing && (
+            <CodeMirror
+              ref={(c: any) => (this.CodeMirrorInstance = c)}
+              onFocusChange={handleFocusChange.bind(this)}
+              value={rule.title}
+            />
+          )}
+
           <button
             className="pa3 br3 rule--link-button"
             disabled={isDisabled}
@@ -62,7 +97,7 @@ class Rule extends Component {
           </button>
         </label>
         {getRuleDescription(rule)}
-      </React.Fragment>
+      </div>
     )
   }
 }

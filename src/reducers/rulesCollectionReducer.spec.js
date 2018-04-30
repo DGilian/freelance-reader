@@ -7,6 +7,42 @@ describe('rulesCollectionReducer', () => {
     })
   })
 
+  describe('UPDATE_RULE action', () => {
+    it('should work', () => {
+      const sample = [{ title: 'foo' }]
+      const action = {
+        type: 'UPDATE_RULE',
+        ruleIndex: 0,
+        title: 'hello'
+      }
+      const expectedResult = [{ title: 'hello' }]
+
+      expect(rulesCollection(sample, action)).toEqual(expectedResult)
+    })
+
+    it('should not change without title', () => {
+      const sample = [{ title: 'foo' }]
+      const action = {
+        type: 'UPDATE_RULE',
+        ruleIndex: 1
+      }
+      const expectedResult = [{ title: 'foo' }]
+
+      expect(rulesCollection(sample, action)).toEqual(expectedResult)
+    })
+
+    it('should not change with index out of bound', () => {
+      const sample = [{ title: 'foo' }]
+      const action = {
+        type: 'UPDATE_RULE',
+        ruleIndex: 2
+      }
+      const expectedResult = [{ title: 'foo' }]
+
+      expect(rulesCollection(sample, action)).toEqual(expectedResult)
+    })
+  })
+
   describe('LINK_SELECTIONS action', () => {
     it('should work', () => {
       const sample = []

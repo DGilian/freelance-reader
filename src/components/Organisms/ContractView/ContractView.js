@@ -63,7 +63,7 @@ class ContractView extends Component {
     }
 
     return (
-      <React.Fragment>
+      <div className="contract-view">
         <div className="contract-view--header">
           <div className="mb4 contract-view--file-upload">
             <p>Charger un contrat (format markdonw) :</p>
@@ -80,7 +80,7 @@ class ContractView extends Component {
             viewportMargin: 500
           }}
         />
-      </React.Fragment>
+      </div>
     )
   }
 }

@@ -2,9 +2,21 @@ import rules from '../resources/data/rules.json'
 
 const defaultState = [...rules]
 
+const deepUpdate = (state, index, key, value) =>
+  value
+    ? [
+        ...state.slice(0, index),
+        {
+          ...state[index],
+          [key]: value
+        },
+        ...state.slice(index + 1)
+      ]
+    : state
+
 const rulesCollection = (
   state = defaultState,
-  { type, selections, ruleIndex = 0 } = {}
+  { type, selections, title, ruleIndex = 0 } = {}
 ) => {
   switch (type) {
     case 'CLEAR_ALL_LINKS':
@@ -12,15 +24,11 @@ const rulesCollection = (
         ...rule,
         links: []
       }))
+    case 'UPDATE_RULE':
+      return deepUpdate(state, ruleIndex, 'title', title)
+
     case 'LINK_SELECTIONS':
-      return [
-        ...state.slice(0, ruleIndex),
-        {
-          ...state[ruleIndex],
-          links: selections
-        },
-        ...state.slice(ruleIndex + 1)
-      ]
+      return deepUpdate(state, ruleIndex, 'links', selections)
     default:
       return state
   }
