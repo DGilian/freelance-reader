@@ -8,6 +8,10 @@ export const setContractAction = contract => ({
   contract
 })
 
+export const resetUpdatedAction = () => ({
+  type: 'RESET_UPDATE'
+})
+
 export const resetSelectionsAction = () => ({
   type: 'RESET_SELECTIONS'
 })

@@ -33,8 +33,8 @@ class Summary extends Component {
           </div>
 
           <ul className="list  summary--list">
-            {selectedRules.map((rule, index) => (
-              <li key={index}>
+            {selectedRules.map(rule => (
+              <li key={rule.id}>
                 <h3>{rule.title} :</h3>
                 {getRuleDescription(rule, true)}
               </li>

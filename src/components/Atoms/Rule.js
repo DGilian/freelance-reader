@@ -30,14 +30,20 @@ export const getRuleDescription = (rule, fullDescription = false) => {
         {rule.links &&
           rule.links.length > 0 && (
             <ul>
-              {rule.links.map(({ text, range }, index) => (
-                <li key={index}>
-                  ligne {range.anchor.line + 1} à {range.head.line + 1}
-                  {fullDescription && (
-                    <React.Fragment> : {text}</React.Fragment>
-                  )}
-                </li>
-              ))}
+              {rule.links.map(({ text, range: { anchor, head } }, index) => {
+                const headIsFirst = head.line <= anchor.line
+                const firstLineNumber = headIsFirst ? head.line : anchor.line
+                const lastLineNumber = headIsFirst ? anchor.line : head.line
+
+                return (
+                  <li key={index}>
+                    ligne {firstLineNumber + 1} à {lastLineNumber + 1}
+                    {fullDescription && (
+                      <React.Fragment> : {text}</React.Fragment>
+                    )}
+                  </li>
+                )
+              })}
             </ul>
           )}
       </div>

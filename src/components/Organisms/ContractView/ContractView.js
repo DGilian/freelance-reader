@@ -7,17 +7,20 @@ import './ContractView.css'
 
 import {
   setSelectionsAction,
-  setContractAction
+  setContractAction,
+  resetUpdatedAction
 } from '../../../actions/contractViewActions'
 import { clearSelectionAction } from '../../../actions/rulesCollectionActions'
 
 const mapStateToProps = state => ({
-  contract: state.contractView.contract
+  contract: state.contractView.contract,
+  forceUpdate: state.contractView.forceUpdate
 })
 
 const mapDispatchToProps = {
   setSelections: setSelectionsAction,
   setContract: setContractAction,
+  resetUpdated: resetUpdatedAction,
   clearLinks: clearSelectionAction
 }
 
@@ -31,11 +34,6 @@ class ContractView extends Component {
     this.setCodeMirrorValue = this.setCodeMirrorValue.bind(this)
   }
 
-  componentWillUpdate(nextProps, prevState) {
-    if (nextProps.contract !== this.props.contract) {
-      this.setCodeMirrorValue(nextProps.contract)
-    }
-  }
   loadContract(path) {
     const onSuccess = this.props.setContract
 
@@ -47,6 +45,14 @@ class ContractView extends Component {
   setCodeMirrorValue(value) {
     this.props.clearLinks()
     this.CodeMirrorInstance.codeMirror.setValue(value)
+  }
+
+  shouldComponentUpdate({ contract, forceUpdate, resetUpdated }) {
+    if (forceUpdate) {
+      this.setCodeMirrorValue(contract)
+      resetUpdated()
+    }
+    return forceUpdate
   }
 
   render() {

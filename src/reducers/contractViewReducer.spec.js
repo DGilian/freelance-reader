@@ -29,7 +29,11 @@ describe('rulesCollectionReducer', () => {
     it('should work', () => {
       const sample = { selections: [] }
       const action = { type: 'SET_CONTRACT', contract: 'foo' }
-      const expectedResult = { contract: 'foo', selections: [] }
+      const expectedResult = {
+        contract: 'foo',
+        forceUpdate: true,
+        selections: []
+      }
 
       expect(contractViewReducer(sample, action)).toEqual(expectedResult)
     })
@@ -37,10 +41,29 @@ describe('rulesCollectionReducer', () => {
     it('should reset selection', () => {
       const sample = { selections: [{ id: 'test' }] }
       const action = { type: 'SET_CONTRACT', contract: 'foo' }
-      const expectedResult = { contract: 'foo', selections: [] }
+      const expectedResult = {
+        contract: 'foo',
+        forceUpdate: true,
+        selections: []
+      }
 
       expect(contractViewReducer(sample, action)).toEqual(expectedResult)
     })
+  })
+
+  describe('RESET_UPDATE action', () => {
+    const sample = {
+      contract: 'foo',
+      forceUpdate: true,
+      selections: []
+    }
+    const action = { type: 'RESET_UPDATE' }
+    const expectedResult = {
+      ...sample,
+      forceUpdate: false
+    }
+
+    expect(contractViewReducer(sample, action)).toEqual(expectedResult)
   })
 
   describe('RESET_SELECTIONS action', () => {

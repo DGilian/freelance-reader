@@ -1,4 +1,4 @@
-const defaultState = { selections: [], contract: '' }
+const defaultState = { selections: [], contract: '', forceUpdate: false }
 
 const contractView = (
   state = defaultState,
@@ -6,7 +6,9 @@ const contractView = (
 ) => {
   switch (type) {
     case 'SET_CONTRACT':
-      return { ...state, contract, selections: [] }
+      return { ...state, contract, selections: [], forceUpdate: true }
+    case 'RESET_UPDATE':
+      return { ...state, forceUpdate: false }
     case 'SET_SELECTIONS':
       return { ...state, selections }
     case 'RESET_SELECTIONS':

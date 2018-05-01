@@ -13,7 +13,7 @@ class CheckList extends Component {
       <ul>
         {rules &&
           rules.map((rule, index) => (
-            <li key={index} className="mb3 list">
+            <li key={rule.id} className="mb3 list">
               <Rule ruleIndex={index} rule={rule} />
             </li>
           ))}
