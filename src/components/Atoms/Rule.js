@@ -66,7 +66,7 @@ class Rule extends Component {
     const toggleEdition = () => this.setState({ editing: !editing })
 
     const handleFocusChange = hasFocus => {
-      const { updateRule, value, ruleIndex, rule } = this.props
+      const { updateRule, ruleIndex } = this.props
       if (!hasFocus) {
         const newTitle = this.CodeMirrorInstance.codeMirror.getValue()
         this.setState(() => ({

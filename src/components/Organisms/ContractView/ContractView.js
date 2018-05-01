@@ -4,14 +4,21 @@ import { connect } from 'react-redux'
 import 'codemirror/mode/markdown/markdown'
 
 import './ContractView.css'
-import contractExamplePath from '../../../resources/contracts/agile.md'
 
-import { setSelectionsAction } from '../../../actions/contractViewActions'
+import {
+  setSelectionsAction,
+  setContractAction
+} from '../../../actions/contractViewActions'
+import { clearSelectionAction } from '../../../actions/rulesCollectionActions'
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+  contract: state.contractView.contract
+})
 
 const mapDispatchToProps = {
-  setSelectionsAction
+  setSelections: setSelectionsAction,
+  setContract: setContractAction,
+  clearLinks: clearSelectionAction
 }
 
 class ContractView extends Component {
@@ -24,12 +31,13 @@ class ContractView extends Component {
     this.setCodeMirrorValue = this.setCodeMirrorValue.bind(this)
   }
 
-  componentDidMount() {
-    this.loadContract(contractExamplePath)
+  componentWillUpdate(nextProps, prevState) {
+    if (nextProps.contract !== this.props.contract) {
+      this.setCodeMirrorValue(nextProps.contract)
+    }
   }
-
   loadContract(path) {
-    const onSuccess = this.setCodeMirrorValue
+    const onSuccess = this.props.setContract
 
     fetch(path)
       .then(response => response.text())
@@ -37,12 +45,13 @@ class ContractView extends Component {
   }
 
   setCodeMirrorValue(value) {
+    this.props.clearLinks()
     this.CodeMirrorInstance.codeMirror.setValue(value)
   }
 
   render() {
     const handleCursorActivity = ({ doc }) => {
-      const { setSelectionsAction } = this.props
+      const { setSelections } = this.props
       if (doc.somethingSelected()) {
         const selections = doc.getSelections()
         const ranges = doc.listSelections()
@@ -50,11 +59,11 @@ class ContractView extends Component {
           text: el,
           range: ranges[index]
         }))
-        setSelectionsAction(selectionSet)
+        setSelections(selectionSet)
       }
     }
 
-    const loadFile = ({ target: { files } }) => {
+    const handleFileUpload = ({ target: { files } }) => {
       const [file] = files
       if (file && file.name.endsWith('.md')) {
         const url = window.URL.createObjectURL(file)
@@ -67,7 +76,10 @@ class ContractView extends Component {
         <div className="contract-view--header">
           <div className="mb4 contract-view--file-upload">
             <p>Charger un contrat (format markdonw) :</p>
-            <input type="file" accept=".md" onChange={loadFile} />
+            <input type="file" accept=".md" onChange={handleFileUpload} />
+            <button onClick={this.setCodeMirrorValue.bind(this, '')}>
+              Reset
+            </button>
           </div>
         </div>
         <CodeMirror

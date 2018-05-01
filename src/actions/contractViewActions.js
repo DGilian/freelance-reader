@@ -3,6 +3,11 @@ export const setSelectionsAction = selections => ({
   selections
 })
 
+export const setContractAction = contract => ({
+  type: 'SET_CONTRACT',
+  contract
+})
+
 export const resetSelectionsAction = () => ({
   type: 'RESET_SELECTIONS'
 })

@@ -25,6 +25,24 @@ describe('rulesCollectionReducer', () => {
     })
   })
 
+  describe('SET_CONTRACT action', () => {
+    it('should work', () => {
+      const sample = { selections: [] }
+      const action = { type: 'SET_CONTRACT', contract: 'foo' }
+      const expectedResult = { contract: 'foo', selections: [] }
+
+      expect(contractViewReducer(sample, action)).toEqual(expectedResult)
+    })
+
+    it('should reset selection', () => {
+      const sample = { selections: [{ id: 'test' }] }
+      const action = { type: 'SET_CONTRACT', contract: 'foo' }
+      const expectedResult = { contract: 'foo', selections: [] }
+
+      expect(contractViewReducer(sample, action)).toEqual(expectedResult)
+    })
+  })
+
   describe('RESET_SELECTIONS action', () => {
     it('should work', () => {
       const sample = { selections: [{ id: '1' }, { id: '2' }] }
