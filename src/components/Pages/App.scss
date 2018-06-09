@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  
+  &-Main--Rule-list {
+    background-color: rgba(128, 104, 104, 0.2)
+  }
 
   &-header {
     background-color: #222;

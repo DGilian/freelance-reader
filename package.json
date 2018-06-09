@@ -19,10 +19,8 @@
   "scripts": {
     "start": "react-scripts start",
     "dev": "npm-run-all --parallel css:watch start",
-    "css":
-      "./node_modules/.bin/node-sass-chokidar --include-path ./src src/ -o src/",
-    "css:watch":
-      "./node_modules/.bin/node-sass-chokidar --include-path ./src src/ -o src/ --watch --recursive",
+    "css": "./node_modules/.bin/node-sass-chokidar --include-path ./src src/ -o src/",
+    "css:watch": "./node_modules/.bin/node-sass-chokidar --include-path ./src src/ -o src/ --watch --recursive",
     "build": "npm run css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "deploy": "npm run build&&gh-pages -d build",
